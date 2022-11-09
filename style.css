@@ -1,0 +1,52 @@
+body {
+    overflow: hidden; /* Hide scrollbars */
+}
+
+video {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    height: 1085px;
+}
+
+#canv {
+    left: -1920px;
+    top: -1920px;
+    position: absolute;
+    width: 5760px;
+    height: 5760px;
+    overflow: hidden;
+    cursor:move;
+}
+
+#earth {
+    position: absolute;
+    top: 45px;
+    left: -5px;
+    width: 52%;
+    animation: rotation 200s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(359deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+#mynetwork {
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+}
+
+#logo {
+    position: absolute;
+    top: 972px;
+    left: 1810px;
+    width: 5%;
+    filter: drop-shadow(0 0 0.2rem rgb(202,215,224));
+}
