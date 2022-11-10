@@ -4,7 +4,7 @@ const container = document.getElementById("mynetwork");
 const nodes = new vis.DataSet([]);
 const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
-const options = {physics: {wind: {x: -0.10, y: 0}}};
+const options = {physics: {wind: {x: -0.12, y: 0}}};
 const network = new vis.Network(container, data, options);
 
 let dayAnchor = {
