@@ -16,21 +16,17 @@ let dayAnchor = {
         x: true,
         y: true,
     },
-    mass: 9
+    mass: 7
 };
 const dayNode = {
     id: 'day-node',
     label: "      \n        ",
     x: 480,
     y: 0,
-    font: {
-        size: 45,
-        color: 'white',
-        face: 'monospace'
-    },
+    font: {color: 'white'},
     color: 'black',
     shape: 'circle',
-    mass: 9
+    mass: 7
 };
 nodes.add(dayAnchor);
 nodes.add(dayNode);
@@ -73,6 +69,27 @@ function removeEdges(action) {
     edges.remove(action.target + ":" + action.source);
 }
 
+function changeDay(action) {
+    let font_sizes = {
+        'Mon': 30,
+        'Tue': 35,
+        'Wed': 40,
+        'Thu': 45,
+        'Fri': 50,
+        'Sat': 55,
+        'Sun': 25
+    }
+
+    nodes.update({
+        id: 'day-node',
+        label: action.new_day,
+        borderWidth: 20,
+        font: {
+            size: font_sizes[action.new_day.substring(0, 3)],
+        }
+    });
+}
+
 function nextAction(json, i) {
     let action = json[i];
     switch (action.action) {
@@ -95,10 +112,7 @@ function nextAction(json, i) {
             nextAction(json, i + 1);
             break;
         case 'change-day':
-            nodes.update({
-                id: 'day-node',
-                label: action.new_day
-            });
+            changeDay(action);
             nextAction(json, i + 1);
             break;
         default:
