@@ -6,5 +6,6 @@ and creates animated graphs.
 
 These animations wouldn't exist without the following resources:
 * visualization library: [vis.js](https://visjs.org/)
-* background video: [kamyvideostock](https://www.vecteezy.com/video/3316275-cartoon-background-space-ship-animation-paralax)
-* fabric animation: [sander](https://codepen.io/UXauthority/pen/KzoBGZ)
+* fabric animation: [codepen.io - sander](https://codepen.io/UXauthority/pen/KzoBGZ)
+* background video: [vecteezy.com - kamyvideostock](https://www.vecteezy.com/video/3316275-cartoon-background-space-ship-animation-paralax)
+
