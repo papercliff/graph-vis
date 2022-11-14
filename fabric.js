@@ -9,11 +9,11 @@ window.requestAnimFrame = (function () {
 const c = document.getElementById('canv');
 const $ = c.getContext('2d');
 //num grids / frame
-const _x = 5760; //x width (canvas width)
-const _y = 5760; //y height (canvas height)
+const _x = 1920; //x width (canvas width)
+const _y = 1080; //y height (canvas height)
 $.clearRect(0, 0, _x, _y);
 
-const gnum = 100;
+const gnum = 200;
 const w = _x / gnum; //grid sq width
 const h = _y / gnum; //grid sq height
 let parts; //particles
@@ -155,13 +155,13 @@ function calls() {
 
 window.requestAnimFrame(go);
 
-function simulateClick(x, y, millis) {
-    msX = 2880 + x;
-    msY = 2460 + y;
+function simulateClick() {
+    msX = 1440;
+    msY = 540;
     msdn = true;
     setTimeout(() => {
         msdn = false;
-    }, millis);
+    }, 200);
 }
 
 function run() {
