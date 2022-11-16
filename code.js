@@ -1,26 +1,34 @@
-const inBetweenMillis = 300;
+const inBetweenMillis = 450;
+const changeHourMillis = 100;
+
+const prevDay = new Date(new Date().setDate(new Date().getDate() - 1));
+const prevDayStr = prevDay.toISOString().split('T')[0];
+
+document.getElementById("date").textContent = prevDay.toDateString();
 
 const container = document.getElementById("mynetwork");
 const nodes = new vis.DataSet([]);
 const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
-const options = {physics: {wind: {x: -0.14, y: 0}}};
+const options = {physics: {wind: {x: -0.11, y: 0}}};
 const network = new vis.Network(container, data, options);
 
 nodes.add({
-    id: 'day-node',
-    label: "      \n        ",
-    x: 480,
+    id: 'hour-node',
+    label: "     \n    ",
+    x: 320,
     y: 0,
     fixed: {x: true, y: true},
     font: {
-        size: 30,
+        size: 20,
+        strokeWidth: 1,
+        vadjust: 5,
         color: 'white',
-        face: 'monospace'
+        face: 'clock'
     },
     color: 'black',
     shape: 'circle',
-    borderWidth: 20
+    borderWidth: 10
 });
 
 function addNode(action) {
@@ -30,12 +38,13 @@ function addNode(action) {
         shadow: {
             enabled: true
         },
-        x: -500,
-        y: 1080.0 * (0.5 - Math.random()) / 2.0,
+        x: 1280.0 * (0.0 - Math.random()) / 2.0,
+        y: 720.0 * (0.5 - Math.random()) / 2.0,
         font: {
-            size: 30,
+            size: 16,
             strokeWidth: 1
         },
+        mass: 0.23,
         group: action.cluster
     });
 }
@@ -45,7 +54,8 @@ function addEdge(action) {
         id: action.source + ":" + action.target,
         from: action.source,
         to: action.target,
-        width: 7
+        width: 4,
+        length: 1
     });
 }
 
@@ -59,32 +69,33 @@ function nextAction(json, i) {
     switch (action.action) {
         case 'add-node':
             addNode(action);
+            nextAction(json, i + 1);
             break;
         case 'add-edge':
             addEdge(action);
+            setTimeout(() => nextAction(json, i + 1), inBetweenMillis);
             break;
         case 'remove-node':
             nodes.remove(action.id);
+            nextAction(json, i + 1);
             break;
         case 'remove-edge':
             removeEdges(action);
+            nextAction(json, i + 1);
             break;
-        case 'change-day':
-            nodes.update({id: 'day-node', label: action.new_day});
-            simulateClick();
+        case 'change-hour':
+            setTimeout(() => {
+                nodes.update({id: 'hour-node', label: action.new_hour});
+                nextAction(json, i + 1);
+            }, changeHourMillis);
+            simulateClick(changeHourMillis);
             break;
         default:
             console.log(action);
     }
-
-    if (action.action === 'add-edge') {
-        setTimeout(() => nextAction(json, i + 1), inBetweenMillis);
-    } else {
-        nextAction(json, i + 1);
-    }
 }
 
-fetch("http://localhost:3333/2022-11-06-actions-with-days.json")
+fetch("http://localhost:3333/" + prevDayStr + "-actions-with-hours.json")
     .then(response => response.json())
     .then(json =>
         setTimeout(() =>
