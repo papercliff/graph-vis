@@ -1,4 +1,4 @@
-const inBetweenMillis = 450;
+const inBetweenMillis = 300;
 const changeHourMillis = 100;
 
 const prevDay = new Date(new Date().setDate(new Date().getDate() - 1));
@@ -10,26 +10,8 @@ const container = document.getElementById("mynetwork");
 const nodes = new vis.DataSet([]);
 const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
-const options = {physics: {wind: {x: -0.11, y: 0}}};
+const options = {};
 const network = new vis.Network(container, data, options);
-
-nodes.add({
-    id: 'hour-node',
-    label: "     \n    ",
-    x: 320,
-    y: 0,
-    fixed: {x: true, y: true},
-    font: {
-        size: 20,
-        strokeWidth: 1,
-        vadjust: 5,
-        color: 'white',
-        face: 'clock'
-    },
-    color: 'black',
-    shape: 'circle',
-    borderWidth: 10
-});
 
 function addNode(action) {
     nodes.add({
@@ -38,13 +20,12 @@ function addNode(action) {
         shadow: {
             enabled: true
         },
-        x: 1280.0 * (0.0 - Math.random()) / 2.0,
-        y: 720.0 * (0.5 - Math.random()) / 2.0,
+        x: 720 * (0.5 - Math.random()),
+        y: 720.0 * (0.5 - Math.random()),
         font: {
-            size: 16,
+            size: 40,
             strokeWidth: 1
         },
-        mass: 0.23,
         group: action.cluster
     });
 }
@@ -54,8 +35,7 @@ function addEdge(action) {
         id: action.source + ":" + action.target,
         from: action.source,
         to: action.target,
-        width: 4,
-        length: 1
+        width: 10
     });
 }
 
@@ -73,6 +53,12 @@ function nextAction(json, i) {
             break;
         case 'add-edge':
             addEdge(action);
+            network.fit({
+                animation: {
+                    duration: inBetweenMillis,
+                    easingFunction: 'easeInOutQuad'
+                }
+            });
             setTimeout(() => nextAction(json, i + 1), inBetweenMillis);
             break;
         case 'remove-node':
@@ -85,7 +71,7 @@ function nextAction(json, i) {
             break;
         case 'change-hour':
             setTimeout(() => {
-                nodes.update({id: 'hour-node', label: action.new_hour});
+                document.getElementById("hour").textContent = action.new_hour;
                 nextAction(json, i + 1);
             }, changeHourMillis);
             simulateClick(changeHourMillis);
@@ -100,6 +86,6 @@ fetch("http://localhost:3333/" + prevDayStr + "-actions-with-hours.json")
     .then(json =>
         setTimeout(() =>
                 nextAction(json, 0),
-            1000
+            10000
         )
     );

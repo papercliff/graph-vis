@@ -13,7 +13,7 @@ const _x = 1280; //x width (canvas width)
 const _y = 720; //y height (canvas height)
 $.clearRect(0, 0, _x, _y);
 
-const gnum = 100;
+const gnum = 60;
 const w = _x / gnum; //grid sq width
 const h = _y / gnum; //grid sq height
 let parts; //particles

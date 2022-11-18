@@ -16,8 +16,8 @@ video {
 }
 
 #canv {
-    top: 4px;
-    left: 6px;
+    top: 6px;
+    left: 10px;
     position: absolute;
     width: 1280px;
     height: 720px;
@@ -46,7 +46,7 @@ video {
 #mynetwork {
     left: 0;
     top: 0;
-    width: 1280px;
+    width: 720px;
     height: 720px;
 }
 
@@ -59,6 +59,18 @@ video {
     text-align: center;
     font-family: clock, serif;
     white-space: nowrap;
+    filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
+}
+
+#hour {
+    position: absolute;
+    top: 325px;
+    left: 932px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    font-family: clock, serif;
+    white-space: break-spaces;
     filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
 }
 
