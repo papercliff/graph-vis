@@ -11,7 +11,7 @@ video {
     position: absolute;
     top: -5px;
     left: 0;
-    height: 725px;
+    height: 1085px;
     filter: brightness(50%);
 }
 
@@ -19,19 +19,19 @@ video {
     top: 6px;
     left: 10px;
     position: absolute;
-    width: 1280px;
-    height: 720px;
+    width: 1920px;
+    height: 1080px;
     overflow: hidden;
     cursor: move;
 }
 
 #earth {
     position: absolute;
-    top: 30px;
+    top: 15px;
     left: -5px;
-    width: 52%;
-    animation: rotation 200s infinite linear;
-    filter: brightness(50%);
+    width: 55%;
+    animation: rotation 600s infinite linear;
+    filter: brightness(5%);
 }
 
 @keyframes rotation {
@@ -46,15 +46,15 @@ video {
 #mynetwork {
     left: 0;
     top: 0;
-    width: 720px;
-    height: 720px;
+    width: 1080px;
+    height: 1080px;
 }
 
 #date {
     position: absolute;
     top: 0;
-    left: 1060px;
-    font-size: 20px;
+    left: 1590px;
+    font-size: 30px;
     color: white;
     text-align: center;
     font-family: clock, serif;
@@ -64,9 +64,9 @@ video {
 
 #hour {
     position: absolute;
-    top: 325px;
-    left: 932px;
-    font-size: 20px;
+    top: 490px;
+    left: 1398px;
+    font-size: 30px;
     color: white;
     text-align: center;
     font-family: clock, serif;
@@ -76,8 +76,8 @@ video {
 
 #logo {
     position: absolute;
-    top: 630px;
-    left: 1185px;
+    top: 945px;
+    left: 1780px;
     width: 6%;
     filter: drop-shadow(0 0 0.1rem rgb(202, 215, 224));
 }

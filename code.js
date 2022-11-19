@@ -20,8 +20,8 @@ function addNode(action) {
         shadow: {
             enabled: true
         },
-        x: 720 * (0.5 - Math.random()),
-        y: 720.0 * (0.5 - Math.random()),
+        x: 1080 * (0.5 - Math.random()),
+        y: 1080.0 * (0.5 - Math.random()),
         font: {
             size: 40,
             strokeWidth: 1
@@ -86,6 +86,6 @@ fetch("http://localhost:3333/" + prevDayStr + "-actions-with-hours.json")
     .then(json =>
         setTimeout(() =>
                 nextAction(json, 0),
-            10000
+            1000
         )
     );
