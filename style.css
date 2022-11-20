@@ -52,9 +52,9 @@ video {
 
 #date {
     position: absolute;
-    top: 0;
-    left: 1590px;
-    font-size: 30px;
+    top: -20px;
+    left: 1495px;
+    font-size: 40px;
     color: white;
     text-align: center;
     font-family: clock, serif;
@@ -64,9 +64,9 @@ video {
 
 #hour {
     position: absolute;
-    top: 490px;
-    left: 1398px;
-    font-size: 30px;
+    top: 455px;
+    left: 1365px;
+    font-size: 50px;
     color: white;
     text-align: center;
     font-family: clock, serif;
@@ -76,8 +76,8 @@ video {
 
 #logo {
     position: absolute;
-    top: 945px;
-    left: 1780px;
-    width: 6%;
+    top: 920px;
+    left: 1750px;
+    width: 8%;
     filter: drop-shadow(0 0 0.1rem rgb(202, 215, 224));
 }

@@ -1,6 +1,3 @@
-const inBetweenMillis = 300;
-const changeHourMillis = 100;
-
 const prevDay = new Date(new Date().setDate(new Date().getDate() - 1));
 const prevDayStr = prevDay.toISOString().split('T')[0];
 
@@ -10,7 +7,7 @@ const container = document.getElementById("mynetwork");
 const nodes = new vis.DataSet([]);
 const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
-const options = {};
+const options = {physics:{solver:'forceAtlas2Based'}};
 const network = new vis.Network(container, data, options);
 
 function addNode(action) {
@@ -20,7 +17,7 @@ function addNode(action) {
         shadow: {
             enabled: true
         },
-        x: 1080 * (0.5 - Math.random()),
+        x: 1080.0 * (0.5 - Math.random()),
         y: 1080.0 * (0.5 - Math.random()),
         font: {
             size: 40,
@@ -53,13 +50,7 @@ function nextAction(json, i) {
             break;
         case 'add-edge':
             addEdge(action);
-            network.fit({
-                animation: {
-                    duration: inBetweenMillis,
-                    easingFunction: 'easeInOutQuad'
-                }
-            });
-            setTimeout(() => nextAction(json, i + 1), inBetweenMillis);
+            nextAction(json, i + 1);
             break;
         case 'remove-node':
             nodes.remove(action.id);
@@ -73,8 +64,14 @@ function nextAction(json, i) {
             setTimeout(() => {
                 document.getElementById("hour").textContent = action.new_hour;
                 nextAction(json, i + 1);
-            }, changeHourMillis);
-            simulateClick(changeHourMillis);
+            }, action.new_hour === "01:00\nUTC" ? 5000 : 2000);
+            simulateClick(200);
+            network.fit({
+                animation: {
+                    duration: 2000,
+                    easingFunction: 'easeInOutQuad'
+                }
+            });
             break;
         default:
             console.log(action);
