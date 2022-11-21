@@ -156,7 +156,7 @@ function calls() {
 window.requestAnimFrame(go);
 
 function simulateClick(inBetweenMillis) {
-    msX = 1440;
+    msX = 1540;
     msY = 540;
     msdn = true;
     setTimeout(() => {

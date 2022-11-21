@@ -46,7 +46,7 @@ video {
 #mynetwork {
     left: 0;
     top: 0;
-    width: 1080px;
+    width: 1280px;
     height: 1080px;
 }
 
@@ -65,7 +65,7 @@ video {
 #hour {
     position: absolute;
     top: 455px;
-    left: 1365px;
+    left: 1465px;
     font-size: 50px;
     color: white;
     text-align: center;
