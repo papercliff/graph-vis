@@ -10,7 +10,14 @@ const data = {nodes: nodes, edges: edges,};
 const options = {physics:{solver:'forceAtlas2Based'}};
 const network = new vis.Network(container, data, options);
 
-function addNode(action) {
+function font(action, maxNodeWeight){
+    return {
+        size: 60.0 * (0.33 + 0.66 * (action.weight / maxNodeWeight)),
+        strokeWidth: 1
+    };
+}
+
+function addNode(action, maxNodeWeight) {
     nodes.add({
         id: action.id,
         label: action.id,
@@ -19,11 +26,8 @@ function addNode(action) {
         },
         x: 1080.0 * (0.5 - Math.random()),
         y: 1080.0 * (0.5 - Math.random()),
-        font: {
-            size: 40,
-            strokeWidth: 1
-        },
-        group: action.cluster
+        group: action.cluster,
+        font: font(action, maxNodeWeight)
     });
 }
 
@@ -32,7 +36,7 @@ function addEdge(action) {
         id: action.source + ":" + action.target,
         from: action.source,
         to: action.target,
-        width: 10
+        width: 7
     });
 }
 
@@ -41,34 +45,42 @@ function removeEdges(action) {
     edges.remove(action.target + ":" + action.source);
 }
 
-function nextAction(json, i) {
+function nextAction(json, maxNodeWeight, i) {
     let action = json[i];
     switch (action.action) {
         case 'add-node':
-            addNode(action);
-            nextAction(json, i + 1);
+            addNode(action, maxNodeWeight);
+            nextAction(json, maxNodeWeight, i + 1);
             break;
         case 'add-edge':
             addEdge(action);
-            nextAction(json, i + 1);
+            nextAction(json, maxNodeWeight, i + 1);
             break;
         case 'remove-node':
             nodes.remove(action.id);
-            nextAction(json, i + 1);
+            nextAction(json, maxNodeWeight, i + 1);
+            break;
+        case 'update-node':
+            nodes.update({
+                id: action.id,
+                font: font(action, maxNodeWeight)
+            });
+            nextAction(json, maxNodeWeight, i + 1);
             break;
         case 'remove-edge':
             removeEdges(action);
-            nextAction(json, i + 1);
+            nextAction(json, maxNodeWeight, i + 1);
             break;
         case 'change-hour':
+            let waitMillis = 2000;
             setTimeout(() => {
                 document.getElementById("hour").textContent = action.new_hour;
-                nextAction(json, i + 1);
-            }, action.new_hour === "01:00\nUTC" ? 5000 : 2000);
+                nextAction(json, maxNodeWeight, i + 1);
+            }, waitMillis);
             simulateClick(200);
             network.fit({
                 animation: {
-                    duration: 2000,
+                    duration: waitMillis,
                     easingFunction: 'easeInOutQuad'
                 }
             });
@@ -80,9 +92,10 @@ function nextAction(json, i) {
 
 fetch("http://localhost:3333/" + prevDayStr + "-actions-with-hours.json")
     .then(response => response.json())
-    .then(json =>
-        setTimeout(() =>
-                nextAction(json, 0),
-            1000
-        )
-    );
+    .then(json => {
+            let maxNodeWeight = Math.max.apply(
+                null,
+                json.map(x => x.weight).filter(x => !isNaN(x))
+            );
+            setTimeout(() => nextAction(json, maxNodeWeight, 0), 1000);
+    });
