@@ -26,8 +26,8 @@ function addNode(action, maxNodeWeight) {
         },
         x: 1080.0 * (0.5 - Math.random()),
         y: 1080.0 * (0.5 - Math.random()),
-        group: action.cluster,
-        font: font(action, maxNodeWeight)
+        font: font(action, maxNodeWeight),
+        color: colors[action.cluster % 21]
     });
 }
 
