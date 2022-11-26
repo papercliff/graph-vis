@@ -9,7 +9,7 @@ window.requestAnimFrame = (function () {
 const c = document.getElementById('canv');
 const $ = c.getContext('2d');
 //num grids / frame
-const _x = 1920; //x width (canvas width)
+const _x = 1080; //x width (canvas width)
 const _y = 1080; //y height (canvas height)
 $.clearRect(0, 0, _x, _y);
 
@@ -110,7 +110,7 @@ function mv_part() {
 
 //draw grid function
 function draw() {
-    $.strokeStyle = "black";
+    $.strokeStyle = "#2B1B17";
     $.beginPath();
     u_ -= .5;
     for (let i = 0; i < gnum - 1; i += 1) {
@@ -156,8 +156,8 @@ function calls() {
 window.requestAnimFrame(go);
 
 function simulateClick(inBetweenMillis) {
-    msX = 1540;
-    msY = 540;
+    msX = 1000;
+    msY = 40;
     msdn = true;
     setTimeout(() => {
         msdn = false;

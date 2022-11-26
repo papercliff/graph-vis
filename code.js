@@ -77,7 +77,7 @@ function nextAction(json, maxNodeWeight, i) {
                 document.getElementById("hour").textContent = action.new_hour;
                 nextAction(json, maxNodeWeight, i + 1);
             }, waitMillis);
-            simulateClick(200);
+            simulateClick(10);
             network.fit({
                 animation: {
                     duration: waitMillis,

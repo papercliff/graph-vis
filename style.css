@@ -10,16 +10,16 @@ body {
 video {
     position: absolute;
     top: -5px;
-    left: 0;
+    left: -840px;
     height: 1085px;
     filter: brightness(50%);
 }
 
 #canv {
-    top: 6px;
-    left: 10px;
+    top: 5px;
+    left: 5px;
     position: absolute;
-    width: 1920px;
+    width: 1080px;
     height: 1080px;
     overflow: hidden;
     cursor: move;
@@ -27,11 +27,11 @@ video {
 
 #earth {
     position: absolute;
-    top: 15px;
-    left: -5px;
-    width: 55%;
-    animation: rotation 600s infinite linear;
-    filter: brightness(5%);
+    top: 30px;
+    left: 27px;
+    width: 95%;
+    animation: rotation 500s infinite linear;
+    filter: brightness(10%);
 }
 
 @keyframes rotation {
@@ -45,17 +45,17 @@ video {
 
 #mynetwork {
     position: absolute;
-    left: -1080px;
-    top: 0;
-    width: 3240px;
-    height: 1080px;
+    top: -360px;
+    left: 20;
+    width: 1080px;
+    height: 1800px;
 }
 
 #date {
     position: absolute;
     top: -20px;
-    left: 1495px;
-    font-size: 40px;
+    left: 20px;
+    font-size: 30px;
     color: white;
     text-align: center;
     font-family: clock, serif;
@@ -65,9 +65,9 @@ video {
 
 #hour {
     position: absolute;
-    top: 455px;
-    left: 1465px;
-    font-size: 50px;
+    top: -10px;
+    left: 960px;
+    font-size: 30px;
     color: white;
     text-align: center;
     font-family: clock, serif;
@@ -77,8 +77,8 @@ video {
 
 #logo {
     position: absolute;
-    top: 920px;
-    left: 1750px;
-    width: 8%;
+    top: 970px;
+    left: 968px;
+    width: 9.5%;
     filter: drop-shadow(0 0 0.1rem rgb(202, 215, 224));
 }
