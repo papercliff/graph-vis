@@ -12,8 +12,10 @@ const network = new vis.Network(container, data, options);
 
 function font(action, maxNodeWeight){
     return {
-        size: 60.0 * (0.33 + 0.66 * (action.weight / maxNodeWeight)),
-        strokeWidth: 1
+        color: 'white',
+        strokeColor: 'black',
+        strokeWidth: 3,
+        size: 60.0 * (0.33 + 0.66 * (action.weight / maxNodeWeight))
     };
 }
 
