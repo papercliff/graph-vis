@@ -74,7 +74,7 @@ function nextAction(json, maxNodeWeight, i) {
             nextAction(json, maxNodeWeight, i + 1);
             break;
         case 'change-hour':
-            let waitMillis = 2000;
+            let waitMillis = 1000;
             setTimeout(() => {
                 document.getElementById("hour").textContent = action.new_hour;
                 nextAction(json, maxNodeWeight, i + 1);
