@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Image</title>
+    <script type="text/javascript"
+            src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
+    ></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<video playsinline autoplay muted loop>
+    <source src="video.mp4" type="video/webm">
+    Your browser does not support the video tag.
+</video>
+<canvas id="canv" width="1080" height="1080"></canvas>
+<img id="earth" src="earth.png" alt="">
+<div id="mynetwork"></div>
+<h1 id="date"></h1>
+<img id="logo" src="logo.png" alt="">
+<script src="fabric.js"></script>
+<script src="colors.js"></script>
+<script src="image_code.js"></script>
+</body>
+</html>
