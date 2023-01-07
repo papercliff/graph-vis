@@ -42,11 +42,6 @@ function addEdge(action) {
     });
 }
 
-function removeEdges(action) {
-    edges.remove(action.source + ":" + action.target);
-    edges.remove(action.target + ":" + action.source);
-}
-
 function nextAction(action, maxNodeWeight) {
     switch (action.action) {
         case 'add-node':
@@ -55,33 +50,17 @@ function nextAction(action, maxNodeWeight) {
         case 'add-edge':
             addEdge(action);
             break;
-        case 'remove-node':
-            nodes.remove(action.id);
-            break;
-        case 'update-node':
-            nodes.update({
-                id: action.id,
-                font: font(action, maxNodeWeight)
-            });
-            break;
-        case 'remove-edge':
-            removeEdges(action);
-            break;
         default:
             console.log(action);
             break;
     }
 }
 
-fetch("http://localhost:3333/" + prevDayStr + "-single-day-actions.json")
-    .then(response => response.json())
-    .then(json => {
-            let maxNodeWeight = Math.max.apply(
-                null,
-                json.map(x => x.weight).filter(x => !isNaN(x))
-            );
-            json.forEach(action => nextAction(action, maxNodeWeight));
-            network.fit();
-            setTimeout(() => network.fit(), 3000);
-            setTimeout(() => network.fit(), 6000);
-    });
+let maxNodeWeight = Math.max.apply(
+    null,
+    singleDayActions.map(x => x.weight).filter(x => !isNaN(x))
+);
+singleDayActions.forEach(action => nextAction(action, maxNodeWeight));
+network.fit();
+setTimeout(() => network.fit(), 3000);
+setTimeout(() => network.fit(), 6000);
