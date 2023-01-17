@@ -61,6 +61,10 @@ let maxNodeWeight = Math.max.apply(
     singleDayActions.map(x => x.weight).filter(x => !isNaN(x))
 );
 singleDayActions.forEach(action => nextAction(action, maxNodeWeight));
-network.fit();
-setTimeout(() => network.fit(), 3000);
-setTimeout(() => network.fit(), 6000);
+
+function eternalFit() {
+    network.fit();
+    setTimeout(() => eternalFit(), 5000);
+}
+
+eternalFit();
