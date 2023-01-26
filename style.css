@@ -63,10 +63,10 @@ video {
     filter: drop-shadow(0 0 0.2rem rgb(255, 255, 255));
 }
 
-#hour {
+#day {
     position: absolute;
     top: -10px;
-    left: 960px;
+    left: 985px;
     font-size: 30px;
     color: white;
     text-align: center;

@@ -1,13 +1,18 @@
-const prevDay = new Date(new Date().setDate(new Date().getDate() - 1));
-const prevDayStr = prevDay.toISOString().split('T')[0];
+const prevMonthDate = new Date(new Date().setDate(new Date().getMonth() - 1));
 
-document.getElementById("date").textContent = prevDay.toDateString();
+document.getElementById("date").textContent = prevMonthDate.toLocaleString(
+    'default',
+    { month: 'long', year: 'numeric' }
+);
 
 const container = document.getElementById("mynetwork");
 const nodes = new vis.DataSet([]);
 const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
-const options = {physics:{solver:'forceAtlas2Based'}};
+const options = {physics:{
+    solver:'forceAtlas2Based',
+    maxVelocity: 5
+}};
 const network = new vis.Network(container, data, options);
 
 function font(action, maxNodeWeight){
@@ -26,8 +31,8 @@ function addNode(action, maxNodeWeight) {
         shadow: {
             enabled: true
         },
-        x: 1080.0 * (0.5 - Math.random()),
-        y: 1080.0 * (0.5 - Math.random()),
+        x: 0.5 * 1080.0 * (0.5 - Math.random()),
+        y: 0.5 * 1080.0 * (0.5 - Math.random()),
         font: font(action, maxNodeWeight),
         color: colors[action.cluster % 21]
     });
@@ -73,31 +78,26 @@ function nextAction(json, maxNodeWeight, i) {
             removeEdges(action);
             nextAction(json, maxNodeWeight, i + 1);
             break;
-        case 'change-hour':
-            let waitMillis = 1500;
+        case 'change-day':
+            let waitMillis = 3000;
             setTimeout(() => {
-                document.getElementById("hour").textContent = action.new_hour;
+                document.getElementById("day").textContent = action.new_day;
                 nextAction(json, maxNodeWeight, i + 1);
             }, waitMillis);
             simulateClick(10);
-            network.fit({
-                animation: {
-                    duration: waitMillis,
-                    easingFunction: 'easeInOutQuad'
-                }
-            });
+            let fit = () => network.fit({animation: {duration: 1000}});
+            fit();
+            setTimeout(fit, 1000);
+            setTimeout(fit, 2000);
             break;
         default:
             console.log(action);
     }
 }
 
-fetch("http://localhost:3333/" + prevDayStr + "-actions-with-hours.json")
-    .then(response => response.json())
-    .then(json => {
-            let maxNodeWeight = Math.max.apply(
-                null,
-                json.map(x => x.weight).filter(x => !isNaN(x))
-            );
-            setTimeout(() => nextAction(json, maxNodeWeight, 0), 1000);
-    });
+let maxNodeWeight = Math.max.apply(
+    null,
+    actionsWithDays.map(x => x.weight).filter(x => !isNaN(x))
+);
+
+setTimeout(() => nextAction(actionsWithDays, maxNodeWeight, 0), 1000);
