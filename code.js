@@ -11,7 +11,7 @@ const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
 const options = {physics:{
     solver:'forceAtlas2Based',
-    maxVelocity: 5
+    maxVelocity: 4
 }};
 const network = new vis.Network(container, data, options);
 
@@ -85,10 +85,6 @@ function nextAction(json, maxNodeWeight, i) {
                 nextAction(json, maxNodeWeight, i + 1);
             }, waitMillis);
             simulateClick(10);
-            let fit = () => network.fit({animation: {duration: 1000}});
-            fit();
-            setTimeout(fit, 1000);
-            setTimeout(fit, 2000);
             break;
         default:
             console.log(action);
@@ -101,3 +97,10 @@ let maxNodeWeight = Math.max.apply(
 );
 
 setTimeout(() => nextAction(actionsWithDays, maxNodeWeight, 0), 1000);
+
+function eternalFit() {
+    network.fit({animation: {duration: 750}});
+    setTimeout(() => eternalFit(), 750);
+}
+
+eternalFit();
