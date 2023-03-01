@@ -46,7 +46,7 @@ const colors = [
       background: "#6E6EFD",
       highlight: { border: "#4220FB", background: "#9B9BFD" },
       hover: { border: "#4220FB", background: "#9B9BFD" },
-    }, // 7: darkblue
+    }, // 7: dark blue
     {
       border: "#FD5A77",
       background: "#FFC0CB",
@@ -59,67 +59,58 @@ const colors = [
       highlight: { border: "#4AD63A", background: "#E6FFE3" },
       hover: { border: "#4AD63A", background: "#E6FFE3" },
     }, // 9: mint
-
     {
       border: "#990000",
       background: "#EE0000",
       highlight: { border: "#BB0000", background: "#FF3333" },
       hover: { border: "#BB0000", background: "#FF3333" },
     }, // 10:bright red
-
     {
       border: "#FF6000",
       background: "#FF6000",
       highlight: { border: "#FF6000", background: "#FF6000" },
       hover: { border: "#FF6000", background: "#FF6000" },
-    }, // 12: real orange
+    }, // 11: real orange
     {
       border: "#97C2FC",
       background: "#2B7CE9",
       highlight: { border: "#D2E5FF", background: "#2B7CE9" },
       hover: { border: "#D2E5FF", background: "#2B7CE9" },
-    }, // 13: blue
+    }, // 12: blue
     {
       border: "#399605",
       background: "#255C03",
       highlight: { border: "#399605", background: "#255C03" },
       hover: { border: "#399605", background: "#255C03" },
-    }, // 14: green
+    }, // 13: green
     {
       border: "#B70054",
       background: "#FF007E",
       highlight: { border: "#B70054", background: "#FF007E" },
       hover: { border: "#B70054", background: "#FF007E" },
-    }, // 15: magenta
+    }, // 14: magenta
     {
       border: "#AD85E4",
       background: "#7C29F0",
       highlight: { border: "#D3BDF0", background: "#7C29F0" },
       hover: { border: "#D3BDF0", background: "#7C29F0" },
-    }, // 16: purple
-    // {
-    //   border: "#4557FA",
-    //   background: "#000EA1",
-    //   highlight: { border: "#6E6EFD", background: "#000EA1" },
-    //   hover: { border: "#6E6EFD", background: "#000EA1" },
-    // }, // xx: darkblue
+    }, // 15: purple
     {
       border: "#FFC0CB",
       background: "#FD5A77",
       highlight: { border: "#FFD1D9", background: "#FD5A77" },
       hover: { border: "#FFD1D9", background: "#FD5A77" },
-    }, // 17: pink
+    }, // 16: pink
     {
       border: "#C2FABC",
       background: "#74D66A",
       highlight: { border: "#E6FFE3", background: "#74D66A" },
       hover: { border: "#E6FFE3", background: "#74D66A" },
-    }, // 18: mint
-
+    }, // 17: mint
     {
       border: "#EE0000",
       background: "#990000",
       highlight: { border: "#FF3333", background: "#BB0000" },
       hover: { border: "#FF3333", background: "#BB0000" },
-    }, // 19:bright red
+    } // 18: bright red
 ];
