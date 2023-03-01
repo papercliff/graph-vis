@@ -64,7 +64,7 @@ const colors = [
       background: "#EE0000",
       highlight: { border: "#BB0000", background: "#FF3333" },
       hover: { border: "#BB0000", background: "#FF3333" },
-    }, // 10:bright red
+    }, // 10: bright red
     {
       border: "#FF6000",
       background: "#FF6000",
