@@ -7,7 +7,10 @@ const container = document.getElementById("mynetwork");
 const nodes = new vis.DataSet([]);
 const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
-const options = {physics:{solver:'forceAtlas2Based'}};
+const options = {physics:{
+    solver:'forceAtlas2Based',
+    forceAtlas2Based:{gravitationalConstant: -20}
+}};
 const network = new vis.Network(container, data, options);
 
 function font(action, maxNodeWeight){

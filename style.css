@@ -16,8 +16,8 @@ video {
 }
 
 #canv {
-    top: 5px;
-    left: 5px;
+    top: 10px;
+    left: 10px;
     position: absolute;
     width: 1080px;
     height: 1080px;
@@ -66,7 +66,7 @@ video {
 #logo {
     position: absolute;
     top: 970px;
-    left: 968px;
+    left: 969px;
     width: 9.5%;
     filter: drop-shadow(0 0 0.1rem rgb(202, 215, 224));
 }

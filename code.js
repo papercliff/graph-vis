@@ -4,7 +4,8 @@ const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
 const options = {physics:{
     solver:'forceAtlas2Based',
-    maxVelocity: 6
+    maxVelocity: 6,
+    forceAtlas2Based:{gravitationalConstant: -20}
 }};
 const network = new vis.Network(container, data, options);
 
@@ -64,15 +65,12 @@ function nextAction(json, maxNodeWeight, i) {
     switch (action.action) {
         case 'add-node':
             addNode(action, maxNodeWeight);
-            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 50);
             break;
         case 'add-edge':
             addEdge(action);
-            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
             break;
         case 'remove-node':
             nodes.remove(action.id);
-            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
             break;
         case 'update-node':
             nodes.update({
@@ -81,20 +79,26 @@ function nextAction(json, maxNodeWeight, i) {
                 color: colors[action.cluster % 19],
                 cluster: action.cluster
             });
-            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
             break;
         case 'remove-edge':
             removeEdges(action);
-            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
             break;
+        default:
+            console.log(action);
+    }
+    switch (action.action) {
         case 'change-day':
             setTimeout(() => {
                 document.getElementById("date").textContent = action.new_day;
                 nextAction(json, maxNodeWeight, i + 1);
-            }, 5000);
+            }, 3000);
             break;
         default:
-            console.log(action);
+            if (Math.random() < 0.5) {
+              nextAction(json, maxNodeWeight, i + 1);
+            } else {
+              setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
+            }
     }
 }
 
@@ -106,7 +110,7 @@ let maxNodeWeight = Math.max.apply(
 setTimeout(() => nextAction(actionsWithDays, maxNodeWeight, 0), 1000);
 
 function eternalFit() {
-    simulateClick(100);
+    simulateClick(1);
     network.fit({animation: {duration: 500}});
     setTimeout(() => eternalFit(), 500);
 }

@@ -13,7 +13,7 @@ const _x = 1080; //x width (canvas width)
 const _y = 1080; //y height (canvas height)
 $.clearRect(0, 0, _x, _y);
 
-const gnum = 100;
+const gnum = 50;
 const w = _x / gnum; //grid sq width
 const h = _y / gnum; //grid sq height
 let parts; //particles
@@ -21,7 +21,7 @@ let frm = 0; //value from
 const P1 = 0.0005; //point one
 const P2 = 0.01; //point two
 const n = 0.98; //n value for later
-const n_vel = 0.020; //velocity
+const n_vel = 0.0175; //velocity
 let u_ = 0; //color update
 let msX = 0; //mouse x
 let msY = 0; //mouse y
