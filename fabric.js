@@ -21,7 +21,7 @@ let frm = 0; //value from
 const P1 = 0.0005; //point one
 const P2 = 0.01; //point two
 const n = 0.98; //n value for later
-const n_vel = 0.03; //velocity
+const n_vel = 0.020; //velocity
 let u_ = 0; //color update
 let msX = 0; //mouse x
 let msY = 0; //mouse y
@@ -156,8 +156,8 @@ function calls() {
 window.requestAnimFrame(go);
 
 function simulateClick(inBetweenMillis) {
-    msX = 1000;
-    msY = 40;
+    msX = 540;
+    msY = 540;
     msdn = true;
     setTimeout(() => {
         msdn = false;

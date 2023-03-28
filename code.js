@@ -1,17 +1,10 @@
-const prevMonthDate = new Date(new Date().setDate(new Date().getMonth() - 1));
-
-document.getElementById("date").textContent = prevMonthDate.toLocaleString(
-    'default',
-    { month: 'long', year: 'numeric' }
-);
-
 const container = document.getElementById("mynetwork");
 const nodes = new vis.DataSet([]);
 const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
 const options = {physics:{
     solver:'forceAtlas2Based',
-    maxVelocity: 4
+    maxVelocity: 6
 }};
 const network = new vis.Network(container, data, options);
 
@@ -24,17 +17,31 @@ function font(action, maxNodeWeight){
     };
 }
 
+function avgCoordinate(sameClusterNodePositions, coordinateF){
+    return (
+        sameClusterNodePositions.reduce((acc, el) => acc + el.x, 0)
+            / sameClusterNodePositions.length
+    || 0.5 * 1080.0 * (0.5 - Math.random()));
+}
+
 function addNode(action, maxNodeWeight) {
+    let sameClusterNodeIds = nodes.get({
+      filter: item => item.cluster == action.cluster
+    }).map(item => item.id);
+    let sameClusterNodePositions = Object.values(
+        network.getPositions(sameClusterNodeIds)
+    );
     nodes.add({
         id: action.id,
         label: action.id,
         shadow: {
             enabled: true
         },
-        x: 0.5 * 1080.0 * (0.5 - Math.random()),
-        y: 0.5 * 1080.0 * (0.5 - Math.random()),
+        x: avgCoordinate(sameClusterNodePositions, el => el.x),
+        y: avgCoordinate(sameClusterNodePositions, el => el.y),
         font: font(action, maxNodeWeight),
-        color: colors[action.cluster % 20]
+        color: colors[action.cluster % 20],
+        cluster: action.cluster
     });
 }
 
@@ -57,34 +64,34 @@ function nextAction(json, maxNodeWeight, i) {
     switch (action.action) {
         case 'add-node':
             addNode(action, maxNodeWeight);
-            nextAction(json, maxNodeWeight, i + 1);
+            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 50);
             break;
         case 'add-edge':
             addEdge(action);
-            nextAction(json, maxNodeWeight, i + 1);
+            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
             break;
         case 'remove-node':
             nodes.remove(action.id);
-            nextAction(json, maxNodeWeight, i + 1);
+            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
             break;
         case 'update-node':
             nodes.update({
                 id: action.id,
-                font: font(action, maxNodeWeight)
+                font: font(action, maxNodeWeight),
+                color: colors[action.cluster % 20],
+                cluster: action.cluster
             });
-            nextAction(json, maxNodeWeight, i + 1);
+            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
             break;
         case 'remove-edge':
             removeEdges(action);
-            nextAction(json, maxNodeWeight, i + 1);
+            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
             break;
         case 'change-day':
-            let waitMillis = 3000;
             setTimeout(() => {
-                document.getElementById("day").textContent = action.new_day;
+                document.getElementById("date").textContent = action.new_day;
                 nextAction(json, maxNodeWeight, i + 1);
-            }, waitMillis);
-            simulateClick(10);
+            }, 5000);
             break;
         default:
             console.log(action);
@@ -99,8 +106,9 @@ let maxNodeWeight = Math.max.apply(
 setTimeout(() => nextAction(actionsWithDays, maxNodeWeight, 0), 1000);
 
 function eternalFit() {
-    network.fit({animation: {duration: 750}});
-    setTimeout(() => eternalFit(), 750);
+    simulateClick(100);
+    network.fit({animation: {duration: 500}});
+    setTimeout(() => eternalFit(), 500);
 }
 
 eternalFit();
