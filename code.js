@@ -40,7 +40,7 @@ function addNode(action, maxNodeWeight) {
         x: avgCoordinate(sameClusterNodePositions, el => el.x),
         y: avgCoordinate(sameClusterNodePositions, el => el.y),
         font: font(action, maxNodeWeight),
-        color: colors[action.cluster % 20],
+        color: colors[action.cluster % 19],
         cluster: action.cluster
     });
 }
@@ -78,7 +78,7 @@ function nextAction(json, maxNodeWeight, i) {
             nodes.update({
                 id: action.id,
                 font: font(action, maxNodeWeight),
-                color: colors[action.cluster % 20],
+                color: colors[action.cluster % 19],
                 cluster: action.cluster
             });
             setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
