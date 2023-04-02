@@ -9,7 +9,7 @@ const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
 const options = {physics:{
     solver:'forceAtlas2Based',
-    forceAtlas2Based:{gravitationalConstant: -20}
+    forceAtlas2Based:{gravitationalConstant: -30}
 }};
 const network = new vis.Network(container, data, options);
 

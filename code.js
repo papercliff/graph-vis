@@ -4,7 +4,7 @@ const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
 const options = {physics:{
     solver:'forceAtlas2Based',
-    maxVelocity: 6,
+    maxVelocity: 7.5,
     forceAtlas2Based:{gravitationalConstant: -20}
 }};
 const network = new vis.Network(container, data, options);
@@ -89,16 +89,21 @@ function nextAction(json, maxNodeWeight, i) {
     switch (action.action) {
         case 'change-day':
             setTimeout(() => {
+                document.getElementById("date").textContent = '';
+            }, 4900);
+            setTimeout(() => {
                 document.getElementById("date").textContent = action.new_day;
                 nextAction(json, maxNodeWeight, i + 1);
-            }, 3000);
+            }, 5000);
+            break;
+        case 'add-node':
+            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
+            break;
+        case 'update-node':
+            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
             break;
         default:
-            if (Math.random() < 0.5) {
-              nextAction(json, maxNodeWeight, i + 1);
-            } else {
-              setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
-            }
+            nextAction(json, maxNodeWeight, i + 1);
     }
 }
 

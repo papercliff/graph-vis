@@ -12,7 +12,7 @@ video {
     top: -5px;
     left: -840px;
     height: 1085px;
-    filter: brightness(50%);
+    filter: brightness(20%);
 }
 
 #canv {
@@ -31,7 +31,7 @@ video {
     left: 27px;
     width: 95%;
     animation: rotation 500s infinite linear;
-    filter: brightness(10%);
+    filter: brightness(20%);
 }
 
 @keyframes rotation {
