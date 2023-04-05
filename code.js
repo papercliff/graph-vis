@@ -4,8 +4,7 @@ const edges = new vis.DataSet([]);
 const data = {nodes: nodes, edges: edges,};
 const options = {physics:{
     solver:'forceAtlas2Based',
-    maxVelocity: 7.5,
-    forceAtlas2Based:{gravitationalConstant: -20}
+    maxVelocity: 7.5
 }};
 const network = new vis.Network(container, data, options);
 
@@ -16,13 +15,6 @@ function font(action, maxNodeWeight){
         strokeWidth: 0,
         size: 60.0 * (0.33 + 0.66 * (action.weight / maxNodeWeight))
     };
-}
-
-function avgCoordinate(sameClusterNodePositions, coordinateF){
-    return (
-        sameClusterNodePositions.reduce((acc, el) => acc + el.x, 0)
-            / sameClusterNodePositions.length
-    || 0.5 * 1080.0 * (0.5 - Math.random()));
 }
 
 function addNode(action, maxNodeWeight) {
@@ -38,8 +30,8 @@ function addNode(action, maxNodeWeight) {
         shadow: {
             enabled: true
         },
-        x: avgCoordinate(sameClusterNodePositions, el => el.x),
-        y: avgCoordinate(sameClusterNodePositions, el => el.y),
+        x: 0.5 * 1080.0 * (0.5 - Math.random()),
+        y: 0.5 * 1080.0 * (0.5 - Math.random()),
         font: font(action, maxNodeWeight),
         color: colors[action.cluster % 19],
         cluster: action.cluster
@@ -96,14 +88,8 @@ function nextAction(json, maxNodeWeight, i) {
                 nextAction(json, maxNodeWeight, i + 1);
             }, 5000);
             break;
-        case 'add-node':
-            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
-            break;
-        case 'update-node':
-            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
-            break;
         default:
-            nextAction(json, maxNodeWeight, i + 1);
+            setTimeout(() => nextAction(json, maxNodeWeight, i + 1), 1);
     }
 }
 
