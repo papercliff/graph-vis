@@ -1,10 +1,21 @@
-Here you can find the code that consumes papercliff
-[data](https://github.com/papercliff/historical-data)
-and creates animated graphs.
+# Graph Vis
 
-![2022-11-06](2022-11-06.gif)
+This project is a visualization tool that represents nodes and edges of a network on a canvas with an animated
+background. Nodes are clustered by colors for better visual distinction.
 
-These animations wouldn't exist without the following resources:
-* visualization library: [vis.js](https://visjs.org/)
-* fabric animation: [codepen.io - sander](https://codepen.io/UXauthority/pen/KzoBGZ)
-* background video: [vecteezy.com - kamyvideostock](https://www.vecteezy.com/video/3316275-cartoon-background-space-ship-animation-paralax)
+<img src="screenshot.png" alt="screenshot" width="40%"/>
+
+The project utilizes the [vis.js](https://visjs.org/) library to accomplish network rendering,
+[this](https://www.vecteezy.com/video/3316275-cartoon-background-space-ship-animation-paralax) video for the background,
+and [this](https://codepen.io/UXauthority/pen/KzoBGZ) script to draw the "fabric of the universe".
+
+## Usage
+
+To use this project, crate a `single-day-actions.js` file and open the `image.html` file in a web browser.
+
+The visualization starts with an empty canvas and dynamically adds nodes and edges based on actions. The actions are
+contained in the `singleDayActions` object that should be defined in the `single-day-actions.js` file. Each action has
+an `id`, `action` (either `add-node` or `add-edge`), `weight`, `source`, and `target`.
+
+The `add-node` action adds a new node to the visualization with the color depending on its `cluster` property, and the
+`add-edge` action adds a new edge between two nodes identified by `source` and `target` properties.
